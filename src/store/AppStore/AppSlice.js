@@ -97,7 +97,7 @@ export const winBet = () => (dispatch, getState) => {
   const currentBalance = selectBalance(getState());
   dispatch(setBalance(currentBalance + (bet * ratio)));
 };
-export const loseBet = () => (dispatch, getState) => {
+export const makeBet = () => (dispatch, getState) => {
   const bet = selectBet(getState());
   const currentBalance = selectBalance(getState());
   dispatch(setBalance(currentBalance - bet));

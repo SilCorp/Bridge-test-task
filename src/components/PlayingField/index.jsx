@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import PlayingCard from '../PlayingCard';
 import {
   getTwoCardsAsync,
-  loseBet,
+  makeBet,
   selectCards,
   selectGameStatus,
   setGameStatus,
@@ -30,14 +30,10 @@ function PlayingField() {
   const cardNumberWin = compareCards(firstCard?.value, secondCard?.value) === 1 ? 1 : 2;
   const hasUserWon = cardNumberWin === selectedCard;
 
-  // Update balance after game
+  // Accrual of winnings after the game
   useEffect(() => {
-    if (isGameFinished) {
-      if (hasUserWon) {
-        dispatch(winBet());
-      } else {
-        dispatch(loseBet());
-      }
+    if (isGameFinished && hasUserWon) {
+      dispatch(winBet());
     }
   }, [dispatch, hasUserWon, isGameFinished]);
 
@@ -51,6 +47,9 @@ function PlayingField() {
     let promise;
     if (isGameProcessing) {
       promise = dispatch(getTwoCardsAsync());
+
+      // Bet when the game starts
+      dispatch(makeBet());
     }
 
     return () => {
