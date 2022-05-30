@@ -10,12 +10,12 @@ function PlayingCard(props) {
   return (
     <Box
       className={clsx(
-        styles.PlaingCard,
+        styles.PlayingCard,
         isFrontSide && styles.flipped,
       )}
       {...BoxProps}
     >
-      <Box className={styles.front}>
+      <Box className={styles.back}>
         <Box className={styles.content}>
           <Typography
             fontSize={200}
@@ -25,7 +25,7 @@ function PlayingCard(props) {
           </Typography>
         </Box>
       </Box>
-      <Box className={styles.back}>
+      <Box className={styles.front}>
         <img src={cardFaceSrc} alt="card-face" />
       </Box>
     </Box>

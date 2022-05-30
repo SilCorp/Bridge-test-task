@@ -1,5 +1,4 @@
-.PlaingCard {
-  cursor: pointer;
+.PlayingCard {
   width: 340px;
   height: 470px;
   display: inline-block;
@@ -10,8 +9,8 @@
     padding: 0;
   }
 
-  .front,
-  .back {
+  .back,
+  .front {
     width: 100%;
     height: 100%;
     overflow: hidden;
@@ -21,10 +20,11 @@
     border-radius: 20px;
   }
 
-  .front {
+  .back {
     transform: perspective(600px) rotateY(0deg);
     background-color: #fff;
     border: 1px solid #000000;
+    cursor: pointer;
 
     .content {
       height: 100%;
@@ -34,7 +34,7 @@
     }
   }
 
-  .back {
+  .front {
     transform: perspective(600px) rotateY(180deg);
     background-color: #f1f1f1;
 
@@ -45,10 +45,10 @@
   }
 
   &.flipped {
-    .front {
+    .back {
       transform: perspective(600px) rotateY(-180deg);
     }
-    .back {
+    .front {
       transform: perspective(600px) rotateY(0deg);
     }
   }
