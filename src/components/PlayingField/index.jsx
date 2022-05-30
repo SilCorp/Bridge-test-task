@@ -30,6 +30,7 @@ function PlayingField() {
   const cardNumberWin = compareCards(firstCard?.value, secondCard?.value) === 1 ? 1 : 2;
   const hasUserWon = cardNumberWin === selectedCard;
 
+  // Update balance after game
   useEffect(() => {
     if (isGameFinished) {
       if (hasUserWon) {
@@ -40,10 +41,12 @@ function PlayingField() {
     }
   }, [dispatch, hasUserWon, isGameFinished]);
 
+  // Flip cards
   useEffect(() => {
     setFlipped(isGameFinished);
   }, [isGameFinished]);
 
+  // Fetch random cards for game
   useEffect(() => {
     let promise;
     if (isGameProcessing) {
