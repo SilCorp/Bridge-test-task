@@ -8,11 +8,21 @@ function AuthProvider({ children }) {
     window.localStorage.getItem(AUTHENTICATED) === 'true'
   ));
 
-  const signIn = (callback = () => {}) => {
-    setIsAuth(true);
-    window.localStorage.setItem(AUTHENTICATED, 'true');
-    callback();
-  };
+  const signIn = (login, password) => (
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (
+          login === process.env.REACT_APP_USER_LOGIN
+          && password === process.env.REACT_APP_USER_PASSWORD
+        ) {
+          setIsAuth(true);
+          window.localStorage.setItem(AUTHENTICATED, 'true');
+          resolve();
+        }
+        reject();
+      }, 1500);
+    })
+  );
 
   const signOut = (callback = () => {}) => {
     setIsAuth(false);
