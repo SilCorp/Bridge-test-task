@@ -17,6 +17,7 @@ import compareCards from '../../helpers/compareCards';
 function PlayingField() {
   const [selectedCard, setSelectedCard] = useState(0);
   const [flipped, setFlipped] = useState(false);
+  const [hasUserWon, setHasUserWon] = useState(false);
   const currentGameStatus = useSelector(selectGameStatus);
   const isUserMakingDecision = currentGameStatus === gameStatus.preparation;
   const isGameProcessing = currentGameStatus === gameStatus.processing;
@@ -27,8 +28,13 @@ function PlayingField() {
   const firstCardImage = firstCard?.image;
   const secondCardImage = secondCard?.image;
 
-  const cardNumberWin = compareCards(firstCard, secondCard) === 1 ? 1 : 2;
-  const hasUserWon = cardNumberWin === selectedCard;
+  // Determining the winner
+  useEffect(() => {
+    if (isGameFinished) {
+      const cardNumberWin = compareCards(firstCard, secondCard) === 1 ? 1 : 2;
+      setHasUserWon(cardNumberWin === selectedCard);
+    }
+  }, [firstCard, isGameFinished, secondCard, selectedCard]);
 
   // Accrual of winnings after the game
   useEffect(() => {
@@ -59,16 +65,9 @@ function PlayingField() {
     };
   }, [dispatch, isGameProcessing]);
 
-  const onFirstCardSelect = () => {
+  const onCardSelect = (cardNumber) => {
     if (isUserMakingDecision) {
-      setSelectedCard(1);
-      dispatch(setGameStatus(gameStatus.processing));
-    }
-  };
-
-  const onSecondCardSelect = () => {
-    if (isUserMakingDecision) {
-      setSelectedCard(2);
+      setSelectedCard(cardNumber);
       dispatch(setGameStatus(gameStatus.processing));
     }
   };
@@ -100,12 +99,12 @@ function PlayingField() {
             isFrontSide={flipped}
             sx={{ margin: '20px' }}
             cardFaceSrc={firstCardImage}
-            onClick={onFirstCardSelect}
+            onClick={() => onCardSelect(1)}
           />
           {isUserMakingDecision && (
             <Button
               variant="contained"
-              onClick={onFirstCardSelect}
+              onClick={() => onCardSelect(1)}
             >
               Слева
             </Button>
@@ -133,7 +132,7 @@ function PlayingField() {
           {isUserMakingDecision && (
             <Button
               variant="contained"
-              onClick={onSecondCardSelect}
+              onClick={() => onCardSelect(2)}
             >
               Справа
             </Button>
@@ -142,7 +141,7 @@ function PlayingField() {
             isFrontSide={flipped}
             sx={{ margin: '20px' }}
             cardFaceSrc={secondCardImage}
-            onClick={onSecondCardSelect}
+            onClick={() => onCardSelect(2)}
           />
         </Box>
       </Box>
