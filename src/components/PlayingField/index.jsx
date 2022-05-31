@@ -118,7 +118,7 @@ function PlayingField() {
         {(isGameFinished || isGameInitialized) && (
           <Button
             onClick={onStartGameClick}
-            variant="outlined"
+            variant="contained"
           >
             {isGameFinished && 'Играть снова!'}
             {isGameInitialized && 'Играть'}

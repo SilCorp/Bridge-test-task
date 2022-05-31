@@ -16,8 +16,15 @@ function WelcomeTextBlock({ hasUserWon }) {
   const gain = useSelector(selectGain);
 
   return (
-    <Box>
-      <Typography display="block">
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+    >
+      <Typography
+        fontSize={50}
+        fontWeight="bold"
+      >
         {isIntrigue && 'Кто выиграет?'}
         {isGameFinished && (
           hasUserWon
@@ -26,11 +33,10 @@ function WelcomeTextBlock({ hasUserWon }) {
         )}
       </Typography>
 
-      {isGameFinished && (
-        <Typography display="block" />
-      )}
-
-      <Typography display="block">
+      <Typography
+        fontSize={20}
+        color="#989898"
+      >
         Сыграй в игру и испытай удачу
       </Typography>
     </Box>
