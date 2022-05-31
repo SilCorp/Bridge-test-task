@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/bridge-test-task/static/css/main.b9f0a7ce.css",
+    "main.js": "/bridge-test-task/static/js/main.42a2332f.js",
+    "index.html": "/bridge-test-task/index.html",
+    "main.b9f0a7ce.css.map": "/bridge-test-task/static/css/main.b9f0a7ce.css.map",
+    "main.42a2332f.js.map": "/bridge-test-task/static/js/main.42a2332f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b9f0a7ce.css",
+    "static/js/main.42a2332f.js"
+  ]
+}
