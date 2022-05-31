@@ -27,7 +27,7 @@ function PlayingField() {
   const firstCardImage = firstCard?.image;
   const secondCardImage = secondCard?.image;
 
-  const cardNumberWin = compareCards(firstCard?.value, secondCard?.value) === 1 ? 1 : 2;
+  const cardNumberWin = compareCards(firstCard, secondCard) === 1 ? 1 : 2;
   const hasUserWon = cardNumberWin === selectedCard;
 
   // Accrual of winnings after the game
