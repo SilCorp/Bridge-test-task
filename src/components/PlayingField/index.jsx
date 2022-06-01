@@ -17,7 +17,6 @@ import compareCards from '../../helpers/compareCards';
 function PlayingField() {
   const [selectedCard, setSelectedCard] = useState(0);
   const [flipped, setFlipped] = useState(false);
-  const [hasUserWon, setHasUserWon] = useState(false);
   const currentGameStatus = useSelector(selectGameStatus);
   const isUserMakingDecision = currentGameStatus === gameStatus.preparation;
   const isGameProcessing = currentGameStatus === gameStatus.processing;
@@ -27,14 +26,11 @@ function PlayingField() {
   const [firstCard, secondCard] = useSelector(selectCards);
   const firstCardImage = firstCard?.image;
   const secondCardImage = secondCard?.image;
-
-  // Determining the winner
-  useEffect(() => {
-    if (isGameFinished) {
-      const cardNumberWin = compareCards(firstCard, secondCard) === 1 ? 1 : 2;
-      setHasUserWon(cardNumberWin === selectedCard);
-    }
-  }, [firstCard, isGameFinished, secondCard, selectedCard]);
+  const cardNumberWin = (
+    (firstCard || 0)
+    && compareCards(firstCard, secondCard) === 1 ? 1 : 2
+  );
+  const hasUserWon = cardNumberWin === selectedCard;
 
   // Accrual of winnings after the game
   useEffect(() => {
